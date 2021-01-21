@@ -59,7 +59,7 @@ const registerUser =  expressHandler(async(req, res) => {
         })
     } else {
     	res.status(400)
-    	throw new Error("invalid data")
+    	throw new Error("invalid data sdad")
     }
 
 })
