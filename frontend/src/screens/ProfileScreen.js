@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {Message} from '../components/Message'
 import {Loader} from '../components/Loader'
 
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 
 
 const ProfileScreen = ({location, history}) => {
@@ -22,6 +22,12 @@ const ProfileScreen = ({location, history}) => {
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+    const { success } = userUpdateProfile
+
+    
+
 
     
 
@@ -45,7 +51,7 @@ const ProfileScreen = ({location, history}) => {
             setMessage('Password do not match')
         }else{
 
-            //DISPATCH UPDATE PROFILE
+            dispatch(updateUserProfile({id : user._id, name,email,password}))
         }
     }
 
@@ -54,6 +60,7 @@ const ProfileScreen = ({location, history}) => {
             <h2> User Profile </h2>
             
             {message && <Message variant="danger">{message}</Message>}
+            {success && <Message variant="success">Update Profile Success</Message>}
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
