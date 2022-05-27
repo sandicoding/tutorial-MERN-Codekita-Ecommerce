@@ -7,13 +7,12 @@ const protect = asyncHandler(async (req, res, next) => {
 
     let token
 
-    if(
-        req.headers.authorization && 
+    if (
+        req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
-    ){
-        console.log('token found')
-       
-        try{
+    ) {
+
+        try {
 
             token = req.headers.authorization.split(' ')[1]
 
@@ -23,10 +22,10 @@ const protect = asyncHandler(async (req, res, next) => {
 
             next()
 
-            
 
 
-        }catch(error){
+
+        } catch (error) {
 
             console.error(error)
             res.status(401)
@@ -35,15 +34,15 @@ const protect = asyncHandler(async (req, res, next) => {
         }
     }
 
-    if(!token) {
+    if (!token) {
         res.status(401)
 
         throw new Error('Not Authorized')
     }
 
-    
 
-   
+
+
 
 
 })
